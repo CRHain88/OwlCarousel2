@@ -689,8 +689,8 @@
 		}
 
 		if (this.settings.touchDrag){
-			this.$stage.on('touchstart.owl.core', $.proxy(this.onDragStart, this));
-			this.$stage.on('touchcancel.owl.core', $.proxy(this.onDragEnd, this));
+			this.$stage.on('touchstart.owl.core.noPreventDefault', $.proxy(this.onDragStart, this));
+			this.$stage.on('touchcancel.owl.core.noPreventDefault', $.proxy(this.onDragEnd, this));
 		}
 	};
 
@@ -739,7 +739,7 @@
 		this._drag.stage.current = stage;
 		this._drag.pointer = this.pointer(event);
 
-		$(document).on('mouseup.owl.core touchend.owl.core', $.proxy(this.onDragEnd, this));
+		$(document).on('mouseup.owl.core touchend.owl.core.noPreventDefault', $.proxy(this.onDragEnd, this));
 
 		$(document).one('mousemove.owl.core touchmove.owl.core', $.proxy(function(event) {
 			var delta = this.difference(this._drag.pointer, this.pointer(event));
@@ -2562,12 +2562,12 @@
 					this.play();
 				}
 			}, this),
-			'touchstart.owl.core': $.proxy(function() {
+			'touchstart.owl.core.noPreventDefault': $.proxy(function() {
 				if (this._core.settings.autoplayHoverPause && this._core.is('rotating')) {
 					this.pause();
 				}
 			}, this),
-			'touchend.owl.core': $.proxy(function() {
+			'touchend.owl.core.noPreventDefault': $.proxy(function() {
 				if (this._core.settings.autoplayHoverPause) {
 					this.play();
 				}
@@ -3268,6 +3268,60 @@
 		/* jshint -W053 */
 		$.support.transform = new String(prefixed('transform'));
 		$.support.transform3d = tests.csstransforms3d();
+	}
+
+})(window.Zepto || window.jQuery, window, document);
+
+/**
+ * jQuery Support Plugin
+ *
+ * @version 1.0.0
+ * @author Christian Hain
+ * @license The MIT License (MIT)
+ */
+;(function($, window, document, undefined) {
+	var supportsEventListenerOptions = false,
+		eventListenerTypes = [
+			'mousewheel',
+			'touchcancel',
+			'touchdrag',
+			'touchend',
+			'touchstart'
+		],
+		i = 0,
+		opts = null,
+		testEvents = null;
+
+	try {
+		// Check to see if the browser can create new Events this way.
+		testEvents = new Event('test');
+
+		// Check to see if the browser supports Event Listener options.
+		opts = Object.defineProperty({}, 'capture', {
+			get: function() {
+				supportsEventListenerOptions = true;
+			}
+		});
+
+		window.addEventListener('test', null, opts);
+	} catch (e) {}
+
+	if (supportsEventListenerOptions) {
+		for (i = 0; i < eventListenerTypes.length; i++) {
+			createSpecialEvent(eventListenerTypes[i]);
+		}
+	}
+
+	function createSpecialEvent(eventListenerType) {
+		$.event.special[eventListenerType] = {
+			setup: function(_, ns, handle) {
+				if (ns.indexOf('noPreventDefault') > -1) {
+					this.addEventListener(eventListenerType, handle, { passive: true });
+				} else {
+					return false;
+				}
+			}
+		}
 	}
 
 })(window.Zepto || window.jQuery, window, document);
