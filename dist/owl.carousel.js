@@ -1692,7 +1692,7 @@
 	 */
 	$.fn.owlCarousel.Constructor = Owl;
 
-})(window.Zepto || window.jQuery, window, document);
+})(jQuery, window, document);
 
 /**
  * AutoRefresh Plugin
@@ -1804,7 +1804,7 @@
 
 	$.fn.owlCarousel.Constructor.Plugins.AutoRefresh = AutoRefresh;
 
-})(window.Zepto || window.jQuery, window, document);
+})(jQuery, window, document);
 
 /**
  * Lazy Plugin
@@ -1940,7 +1940,7 @@
 
 	$.fn.owlCarousel.Constructor.Plugins.Lazy = Lazy;
 
-})(window.Zepto || window.jQuery, window, document);
+})(jQuery, window, document);
 
 /**
  * AutoHeight Plugin
@@ -2038,7 +2038,7 @@
 
 	$.fn.owlCarousel.Constructor.Plugins.AutoHeight = AutoHeight;
 
-})(window.Zepto || window.jQuery, window, document);
+})(jQuery, window, document);
 
 /**
  * Video Plugin
@@ -2358,7 +2358,7 @@
 
 	$.fn.owlCarousel.Constructor.Plugins.Video = Video;
 
-})(window.Zepto || window.jQuery, window, document);
+})(jQuery, window, document);
 
 /**
  * Animate Plugin
@@ -2480,7 +2480,7 @@
 
 	$.fn.owlCarousel.Constructor.Plugins.Animate = Animate;
 
-})(window.Zepto || window.jQuery, window, document);
+})(jQuery, window, document);
 
 /**
  * Autoplay Plugin
@@ -2680,7 +2680,7 @@
 
 	$.fn.owlCarousel.Constructor.Plugins.autoplay = Autoplay;
 
-})(window.Zepto || window.jQuery, window, document);
+})(jQuery, window, document);
 
 /**
  * Navigation Plugin
@@ -3063,7 +3063,7 @@
 
 	$.fn.owlCarousel.Constructor.Plugins.Navigation = Navigation;
 
-})(window.Zepto || window.jQuery, window, document);
+})(jQuery, window, document);
 
 /**
  * Hash Plugin
@@ -3186,7 +3186,7 @@
 
 	$.fn.owlCarousel.Constructor.Plugins.Hash = Hash;
 
-})(window.Zepto || window.jQuery, window, document);
+})(jQuery, window, document);
 
 /**
  * Support Plugin
@@ -3270,7 +3270,7 @@
 		$.support.transform3d = tests.csstransforms3d();
 	}
 
-})(window.Zepto || window.jQuery, window, document);
+})(jQuery, window, document);
 
 /**
  * jQuery Support Plugin
@@ -3324,4 +3324,4 @@
 		}
 	}
 
-})(window.Zepto || window.jQuery, window, document);
+})(jQuery, window, document);
